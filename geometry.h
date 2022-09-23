@@ -31,4 +31,7 @@ struct CircularPlate {
   double thickness;
 };
 
+using Geometry = std::variant<Cylinder, Sphere>;
+
+
 #endif

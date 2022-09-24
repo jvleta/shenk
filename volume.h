@@ -5,6 +5,7 @@
 
 #include "geometry.h"
 
+namespace volumes {
 constexpr double pi = M_PI;
 
 struct InternalVolume {
@@ -16,10 +17,18 @@ struct InternalVolume {
     constexpr double factor = 4.0 / 3.0;
     return factor * pi * std::pow(sphere.radius, 3.0);
   }
+
+  double operator()(Ellipse ellipse) {
+    constexpr double factor = 4.0 / 3.0;
+    return factor * pi * std::pow(ellipse.radius, 3.0) / ellipse.ratio;
+  }
 };
 
+using Geometry = std::variant<Cylinder, Sphere, Ellipse>;
 [[nodiscard]] double ComputeInternalVolume(Geometry geometry) {
   return std::visit(InternalVolume(), geometry);
 }
+
+} // namespace volumes
 
 #endif

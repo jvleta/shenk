@@ -2,21 +2,22 @@
 #include <variant>
 #include <vector>
 
-// #include "materials.h"
-// #include "stress.h"
+#include "stress.h"
 #include "geometry.h"
 #include "conditions.h"
+#include "components.h"
+#include "volume.h"
 
 int main() {
-  auto cylinder = Cylinder(30.0, 1.0, 5.0);
-  auto condition1 = OperatingCondition(250.0, 600.0);
+  auto cylinder1 = Cylinder{};
+  auto cylinder2 = Cylinder{30.0, 1.0, 5.0};
 
-  // using Components = std::variant<Component<Cylinder>, Component<Sphere>>;
-  // std::vector<Components> components{
-  //     Component<Cylinder>{{30.0, 1.0, 10.0}, condition1},
-  //     Component<Sphere>{{30.0, 1.0}, condition1}};
-  // for (auto &comp : components) {
-  //   std::visit(ComputeStressState(), comp);
-  // }
+  auto v1 = volumes::ComputeInternalVolume(cylinder1);
+  auto v2 = volumes::ComputeInternalVolume(cylinder2);
+  
+  double rho = 0.283;
+
+  double w1 = rho * v1;
+
   return 0;
 }

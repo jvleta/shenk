@@ -2,33 +2,39 @@
 #define GEOMETRY_H
 
 #include <ostream>
+#include <boost/typeof/std/complex.hpp>
+#include <boost/units/systems/si/length.hpp>
+#include <boost/units/systems/si/io.hpp>
+
+using namespace boost::units::si;
+using namespace boost::units;
 
 struct Cylinder {
-  const double radius;
-  const double thickness;
-  const double length;
+  quantity<length> radius;
+  quantity<length> thickness;
+  quantity<length> height;
 };
 
 struct Sphere {
-  const double radius;
-  const double thickness;
+  quantity<length> radius;
+  quantity<length> thickness;
 };
 
 struct Ellipse {
-  const double radius;
-  const double thickness;
-  const double ratio;
+  quantity<length> radius;
+  double ratio;
+  quantity<length> thickness;
 };
 
 struct RectangularPlate {
-  const double length;
-  const double width;
-  const double thickness;
+  quantity<length> base;
+  quantity<length> height;
+  quantity<length> thickness;
 };
 
 struct CircularPlate {
-  double radius;
-  double thickness;
+  quantity<length> radius;
+  quantity<length> thickness;
 };
 
 using Geometry = std::variant<Cylinder, Sphere>;

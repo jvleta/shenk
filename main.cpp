@@ -6,23 +6,29 @@
 #include "conditions.h"
 #include "geometry.h"
 #include "volume.h"
+#include "stress.h"
 
 #include <boost/typeof/std/complex.hpp>
 #include <boost/units/systems/si/io.hpp>
 #include <boost/units/systems/si/length.hpp>
+#include <boost/units/systems/si/pressure.hpp>
+#include <boost/units/systems/temperature/celsius.hpp>
 
 using namespace boost::units::si;
 using namespace boost::units;
 
 int main() {
-  auto cylinder1 = Cylinder{};
-  auto cylinder2 = Cylinder{30.0 * meter, 1.0 * meter, 5.0 * meter};
+  auto cylinder = Cylinder{3.0 * meter, 0.0254 * meter, 10.0 * meter};
+  auto condition = OperatingCondition{1.38e6 * pascals, 250.0 * absolute<celsius::temperature>()};
+  auto volume = volumes::ComputeInternalVolume(cylinder);
 
-  auto v1 = volumes::ComputeInternalVolume(cylinder1);
-  auto v2 = volumes::ComputeInternalVolume(cylinder2);
+  auto component = CylindricalComponent{cylinder, condition};
 
-  std::cout << v1 << "\n";
-  std::cout << v2 << "\n";
+  auto stresses = ComputePrincipalStresses(component);
+
+  std::cout << "sigma1 = " << std::get<0>(stresses) << "\n";
+  std::cout << "sigma2 = " << std::get<1>(stresses) << "\n";
+  std::cout << "sigma3 = " << std::get<2>(stresses) << "\n";
 
   return 0;
 }

@@ -18,8 +18,27 @@ using namespace boost::units;
 
 using stress = pressure;
 
+struct StressTensor {
+  quantity<stress> sigma11{};
+  quantity<stress> sigma22{};
+  quantity<stress> sigma33{};
+  quantity<stress> sigma23{};
+  quantity<stress> sigma13{};
+  quantity<stress> sigma12{};
+};
+
+// struct PrincipalStresses {
+//   quantity<stress> sigma1;
+//   quantity<stress> sigma2;
+//   quantity<stress> sigma3;
+// };
+
 using PrincipalStresses =
     std::tuple<quantity<stress>, quantity<stress>, quantity<stress>>;
+
+// using StressTensor =
+//     std::tuple<quantity<stress>, quantity<stress>, quantity<stress>,
+//                quantity<stress>, quantity<stress>, quantity<stress>>;
 class ComputeStressState {
 private:
   auto compute_hoop_stress(quantity<stress> p, quantity<length> r,
@@ -29,10 +48,9 @@ private:
 
 public:
   auto operator()(CylindricalComponent component) -> PrincipalStresses {
-
-    quantity<stress> sigma = compute_hoop_stress(component.condition.pressure,
-                                                 component.geometry.radius,
-                                                 component.geometry.thickness);
+    auto sigma = compute_hoop_stress(component.condition.pressure,
+                                component.geometry.radius,
+                                component.geometry.thickness);
     return {sigma, sigma / 2.0, 0.0 * pascal};
   }
 
@@ -45,7 +63,8 @@ public:
 };
 
 using ComponentType = std::variant<CylindricalComponent, SphericalComponent>;
-[[nodiscard]] PrincipalStresses ComputePrincipalStresses(ComponentType component) {
+[[nodiscard]] PrincipalStresses
+ComputePrincipalStresses(ComponentType component) {
   return std::visit(ComputeStressState(), component);
 }
 

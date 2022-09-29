@@ -1,6 +1,8 @@
 #ifndef VOLUME_H
 #define VOLUME_H
 
+#include <variant>
+
 #include <boost/typeof/std/complex.hpp>
 #include <boost/units/pow.hpp>
 #include <boost/units/systems/si/length.hpp>

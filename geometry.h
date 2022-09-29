@@ -2,6 +2,7 @@
 #define GEOMETRY_H
 
 #include <ostream>
+
 #include <boost/typeof/std/complex.hpp>
 #include <boost/units/systems/si/length.hpp>
 #include <boost/units/systems/si/io.hpp>

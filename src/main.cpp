@@ -18,6 +18,7 @@ using namespace boost::units::si;
 using namespace boost::units;
 
 int main() {
+  double *x;
   auto cylinder = Cylinder{3.0 * meter, 0.0254 * meter, 10.0 * meter};
   auto condition = OperatingCondition{1.38e6 * pascals,
                                       250.0 * absolute<celsius::temperature>()};

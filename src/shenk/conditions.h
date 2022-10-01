@@ -12,6 +12,11 @@ using namespace boost::units::temperature;
 struct OperatingCondition {
   quantity<pressure> pressure;
   quantity<absolute<celsius::temperature>> temperature;
+  friend std::ostream &operator<<(std::ostream &os, const OperatingCondition &condition) {
+    os << "pressure   : " << condition.pressure << "\n"
+       << "temperature: " << condition.temperature << "\n";
+    return os;
+  }
 };
 
 #endif

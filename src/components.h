@@ -11,7 +11,7 @@ template <typename GeometryType> struct Component {
 
 using CylindricalComponent = Component<Cylinder>;
 using SphericalComponent = Component<Sphere>;
-using EllipticalComponent = Component<Ellipse>;
+using EllipsoidalComponent = Component<Ellipsoid>;
 using CircularPlateComponent = Component<CircularPlate>;
 using RectangularPlateComponent = Component<RectangularPlate>;
 

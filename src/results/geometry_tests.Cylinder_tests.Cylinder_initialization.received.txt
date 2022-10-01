@@ -1,4 +1,0 @@
-radius   : 0 m
-thickness: 0 m
-height   : 0 m
-

@@ -12,7 +12,7 @@
 
 #include "geometry.h"
 
-using namespace boost::units::si;
+using namespace boost::units::si;       
 using namespace boost::units;
 
 namespace volumes {
@@ -28,13 +28,13 @@ struct InternalVolume {
     return factor * pi * pow<3>(sphere.radius);
   }
 
-  quantity<volume> operator()(Ellipse ellipse) {
+  quantity<volume> operator()(Ellipsoid ellipsoid) {
     constexpr double factor = 4.0 / 3.0;
-    return factor * pi * pow<3>(ellipse.radius) / ellipse.ratio;
+    return factor * pi * ellipsoid.radius1 * ellipsoid.radius2 * ellipsoid.height;
   }
 };
 
-using Geometry = std::variant<Cylinder, Sphere, Ellipse>;
+using Geometry = std::variant<Cylinder, Sphere, Ellipsoid>;
 [[nodiscard]] quantity<volume> ComputeInternalVolume(Geometry geometry) {
   return std::visit(InternalVolume(), geometry);
 }

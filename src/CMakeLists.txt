@@ -1,2 +1,2 @@
-add_executable(${PROJECT_NAME} main.cpp)
-target_include_directories(${PROJECT_NAME} PRIVATE /opt/homebrew/include)
+add_library(shenk INTERFACE)
+target_include_directories(shenk INTERFACE .)

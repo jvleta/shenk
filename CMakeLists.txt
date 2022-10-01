@@ -17,3 +17,4 @@ endif()
 include(external/cppcheck.cmake)
 
 add_subdirectory(src)
+add_subdirectory(tests)

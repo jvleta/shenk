@@ -9,10 +9,10 @@ template <typename GeometryType> struct Component {
   OperatingCondition condition;
 };
 
-using CylindricalComponent = Component<Cylinder>;
-using SphericalComponent = Component<Sphere>;
-using EllipsoidalComponent = Component<Ellipsoid>;
-using CircularPlateComponent = Component<CircularPlate>;
-using RectangularPlateComponent = Component<RectangularPlate>;
+using CylindricalComponent = Component<shenk::geometry::Cylinder>;
+using SphericalComponent = Component<shenk::geometry::Sphere>;
+using EllipsoidalComponent = Component<shenk::geometry::Ellipsoid>;
+using CircularPlateComponent = Component<shenk::geometry::CircularPlate>;
+using RectangularPlateComponent = Component<shenk::geometry::RectangularPlate>;
 
 #endif

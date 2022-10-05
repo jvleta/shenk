@@ -10,6 +10,7 @@
 using namespace boost::units::si;
 using namespace boost::units;
 
+namespace shenk::geometry {
 struct Cylinder {
   quantity<length> radius;
   quantity<length> thickness;
@@ -49,7 +50,8 @@ struct RectangularPlate {
   quantity<length> base;
   quantity<length> height;
   quantity<length> thickness;
-  friend std::ostream &operator<<(std::ostream &os, const RectangularPlate &plate) {
+  friend std::ostream &operator<<(std::ostream &os,
+                                  const RectangularPlate &plate) {
     os << "base     : " << plate.base << "\n"
        << "height   : " << plate.height << "\n"
        << "thickness: " << plate.thickness << "\n";
@@ -60,13 +62,14 @@ struct RectangularPlate {
 struct CircularPlate {
   quantity<length> radius;
   quantity<length> thickness;
-  friend std::ostream &operator<<(std::ostream &os, const CircularPlate &plate) {
+  friend std::ostream &operator<<(std::ostream &os,
+                                  const CircularPlate &plate) {
     os << "radius   : " << plate.radius << "\n"
        << "thickness: " << plate.thickness << "\n";
     return os;
   }
 };
 
-using Geometry = std::variant<Cylinder, Sphere>;
+} // namespace shenk::geometry
 
 #endif

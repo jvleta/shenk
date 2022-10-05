@@ -1,4 +1,4 @@
-#include <shenk/shenk.h>
+#include <shenk/geometry.h>
 
 #include <boost/typeof/std/complex.hpp>
 #include <boost/units/systems/si/io.hpp>
@@ -16,27 +16,27 @@ using namespace boost::units;
 constexpr auto zero_length = quantity<length>{};
 
 TEST(Cylinder_tests, Cylinder_initialization) {
-  auto cylinder = Cylinder{};
+  auto cylinder = shenk::geometry::Cylinder{};
   ApprovalTests::Approvals::verify(cylinder);
 }
 
 TEST(Sphere_tests, Sphere_initialization) {
-  auto sphere = Sphere{};
+  auto sphere = shenk::geometry::Sphere{};
   ApprovalTests::Approvals::verify(sphere);
 }
 
 TEST(Ellipspoid_tests, Ellipspoid_initialization) {
-  auto ellipsoid = Ellipsoid{};
+  auto ellipsoid = shenk::geometry::Ellipsoid{};
   ApprovalTests::Approvals::verify(ellipsoid);
 }
 
 TEST(RectangularPlate_tests, RectangularPlate_initialization) {
-  auto plate = RectangularPlate{};
+  auto plate = shenk::geometry::RectangularPlate{};
   ApprovalTests::Approvals::verify(plate);
 }
 
 TEST(CircularPlate_tests, CircularPlate_initialization) {
-  auto plate = CircularPlate{};
+  auto plate = shenk::geometry::CircularPlate{};
   ApprovalTests::Approvals::verify(plate);
 }
   

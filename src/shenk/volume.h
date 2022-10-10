@@ -30,8 +30,7 @@ struct InternalVolume {
 
   quantity<volume> operator()(Ellipsoid ellipsoid) {
     constexpr double factor = 4.0 / 3.0;
-    return factor * pi * ellipsoid.radius1 * ellipsoid.radius2 *
-           ellipsoid.height;
+    return factor * pi * pow<2>(ellipsoid.radius) * ellipsoid.height;
   }
 };
 

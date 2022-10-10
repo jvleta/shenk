@@ -17,24 +17,45 @@ using namespace boost::units::si;
 using namespace boost::units;
 
 TEST(Cylinder_Volume_Tests, InternalVolume) {
-  constexpr auto radius = 1.0 * meter;
-  constexpr auto length = 10.0 * meter;
-  constexpr auto thickness = 0.01 * meter;
   std::vector<quantity<si::length>> radii{1.0 * meter, 2.0 * meter,
                                           3.0 * meter};
   std::vector<quantity<si::length>> heights{10.0 * meter, 20.0 * meter,
                                             30.0 * meter};
-  std::vector<quantity<si::length>> thicknesses{.01 * meter, 0.02 * meter,
-                                                0.03 * meter};
-
-//   const auto cyl = shenk::geometry::Cylinder{radius, thickness, length};
-//   auto volume = shenk::geometry::ComputeInternalVolume(cyl);
-//   ApprovalTests::Approvals::verify(volume);
+  constexpr auto thickness = 0.01 * meter;
   ApprovalTests::CombinationApprovals::verifyAllCombinations(
-      "INTERNAL VOLUMES",
-      [&](auto r, auto t, auto h) {
-        auto cylinder = shenk::geometry::Cylinder{r, t, h};
+      "CYLINDER INTERNAL VOLUME:",
+      [&](auto r, auto h) {
+        auto cylinder = shenk::geometry::Cylinder{r, thickness, h};
         return shenk::geometry::ComputeInternalVolume(cylinder);
       },
-      radii, thicknesses, heights);
+      radii, heights);
+}
+
+TEST(Sphere_Volume_Tests, InternalVolume) {
+  std::vector<quantity<si::length>> radii{1.0 * meter, 2.0 * meter,
+                                          3.0 * meter};
+  constexpr auto thickness = 0.01 * meter;
+  std::vector<quantity<si::volume>> volumes{};
+  std::for_each(radii.begin(), radii.end(), [&](const auto r) {
+    const auto sphere = shenk::geometry::Sphere{r, thickness};
+    auto v = shenk::geometry::ComputeInternalVolume(sphere);
+    volumes.push_back(v);
+  });
+  ApprovalTests::Approvals::verifyAll("SPHERE INTERNAL VOLUME", volumes);
+}
+
+TEST(Ellipsoid_Volume_Tests, InternalVolume) {
+  std::vector<quantity<si::length>> radii{1.0 * meter, 2.0 * meter,
+                                          3.0 * meter};
+  std::vector<quantity<si::length>> heights{10.0 * meter, 20.0 * meter,
+                                            30.0 * meter};
+  constexpr auto thickness = 0.01 * meter;
+
+  ApprovalTests::CombinationApprovals::verifyAllCombinations(
+      "ELLIPSOID INTERNAL VOLUME:",
+      [&](auto r, auto h) {
+        auto ellipsoid = shenk::geometry::Ellipsoid{r, h, thickness};
+        return shenk::geometry::ComputeInternalVolume(ellipsoid);
+      },
+      radii, heights);
 }

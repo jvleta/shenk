@@ -1,4 +1,4 @@
-radius1: 0 m
-radius2: 0 m
-height : 0 m
+radius   : 0 m
+height   : 0 m
+thickness: 0 m
 

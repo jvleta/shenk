@@ -34,14 +34,14 @@ struct Sphere {
 };
 
 struct Ellipsoid {
-  quantity<length> radius1;
-  quantity<length> radius2;
+  quantity<length> radius;
   quantity<length> height;
+  quantity<length> thickness;
   friend std::ostream &operator<<(std::ostream &os,
                                   const Ellipsoid &ellipsoid) {
-    os << "radius1: " << ellipsoid.radius1 << "\n"
-       << "radius2: " << ellipsoid.radius2 << "\n"
-       << "height : " << ellipsoid.height << "\n";
+    os << "radius   : " << ellipsoid.radius << "\n"
+       << "height   : " << ellipsoid.height << "\n"
+       << "thickness: " << ellipsoid.thickness << "\n";
     return os;
   }
 };
